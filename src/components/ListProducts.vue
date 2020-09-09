@@ -18,10 +18,10 @@
         <md-table-cell>{{product.price}}</md-table-cell>
         <md-table-cell>{{product.createdAt}}</md-table-cell>
         <md-table-cell>{{product.updatedAt}}</md-table-cell>
-<!--        <md-table-cell>-->
-<!--          <md-button @click="updateProduct(product)">Modifier</md-button>-->
+        <md-table-cell>
+          <md-button @click="updateProduct(product)">Modifier</md-button>
 <!--          <md-button class="md-accent" @click="deleteProduct(product, index)">Supprimer</md-button>-->
-<!--        </md-table-cell>-->
+        </md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -33,6 +33,11 @@ export default {
   props: {
     products: Array,
     productsIsLoad: Boolean
+  },
+  methods: {
+    updateProduct(product) {
+      this.$emit('updateProduct', product);
+    }
   }
 }
 </script>

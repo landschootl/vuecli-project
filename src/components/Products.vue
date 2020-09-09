@@ -1,8 +1,9 @@
 <template>
   <div>
     <h1 class="md-display-2">Gestion de mes produits :</h1>
-    <save-products @addProduct="addNewProduct($event)"></save-products>
-    <List-products :products="products" :productsIsLoad="productsIsLoad"></List-products>
+    <save-products @addProduct="addNewProduct($event)" @updateProduct="updateProduct($event)" :isCreateMode="isCreateMode" :saveProduct="saveProduct"></save-products>
+    <List-products :products="products" :productsIsLoad="productsIsLoad" @updateProduct="changeUpdateMode($event)"></List-products>
+    <md-button @click="changeCreateMode()">Créer un nouveau produit</md-button>
   </div>
 </template>
 
@@ -19,7 +20,9 @@ export default {
   data: function () {
     return {
       products: [],
-      productsIsLoad: false
+      productsIsLoad: false,
+      isCreateMode: true,
+      saveProduct: {name: '', price: 0}
     }
   },
   methods: {
@@ -31,6 +34,22 @@ export default {
     },
     addNewProduct(product) {
       this.products.push(product);
+      this.initNewProduct();
+    },
+    updateProduct(newProduct) {
+      this.products = this.products.map(product => product.id === newProduct.id ? newProduct : product);
+      this.changeCreateMode();
+    },
+    changeUpdateMode(product) {
+      this.isCreateMode = false;
+      this.saveProduct = Object.assign({}, product);
+    },
+    changeCreateMode() {
+      this.isCreateMode = true;
+      this.initNewProduct();
+    },
+    initNewProduct() {
+      this.saveProduct = {name: '', price: 0};
     }
   },
   created() {
