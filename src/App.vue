@@ -16,12 +16,13 @@
 </script>
 
 <style>
+    body {
+        background-color: white;
+        margin: 0px;
+        padding: 15px;
+    }
     #app {
-        font-family: Avenir, Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
+        padding: 0px 200px;
     }
 </style>
