@@ -3,7 +3,7 @@
     <h1 class="md-display-2">Gestion de mes produits :</h1>
     <save-products @addProduct="addNewProduct($event)" @updateProduct="updateProduct($event)" :isCreateMode="isCreateMode" :saveProduct="saveProduct"></save-products>
     <List-products :products="products" :productsIsLoad="productsIsLoad" @updateProduct="changeUpdateMode($event)"></List-products>
-    <md-button @click="changeCreateMode()">Créer un nouveau produit</md-button>
+    <md-button class="md-raised" @click="changeCreateMode()">Créer un nouveau produit</md-button>
   </div>
 </template>
 

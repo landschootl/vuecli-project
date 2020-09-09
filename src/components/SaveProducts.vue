@@ -9,7 +9,7 @@
       <label>Price</label>
       <md-input v-model="saveProduct.price" type="number"></md-input>
     </md-field>
-    <md-button class="md-primary" @click="save()">{{isCreateMode? `Créer mon produit`: `Modifier mon produit`}}</md-button>
+    <md-button class="md-raised md-primary" @click="save()">{{isCreateMode? `Créer mon produit`: `Modifier mon produit`}}</md-button>
   </div>
 </template>
 

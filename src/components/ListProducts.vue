@@ -1,6 +1,8 @@
 <template>
   <div>
     <h2 class="md-display-1">La liste de mes produits :</h2>
+    <p>Nombre de produit : {{totalProducts}}</p>
+    <p v-if="productsIsLoad">Prix total : {{totalPrice}} €</p>
     <md-progress-spinner v-if="!productsIsLoad" md-mode="indeterminate"></md-progress-spinner>
     <md-table v-else id="products-tab">
       <md-table-row>
@@ -20,7 +22,7 @@
         <md-table-cell>{{product.updatedAt}}</md-table-cell>
         <md-table-cell>
           <md-button @click="updateProduct(product)">Modifier</md-button>
-<!--          <md-button class="md-accent" @click="deleteProduct(product, index)">Supprimer</md-button>-->
+          <md-button class="md-accent" @click="deleteProduct(product, index)">Supprimer</md-button>
         </md-table-cell>
       </md-table-row>
     </md-table>
@@ -37,6 +39,23 @@ export default {
   methods: {
     updateProduct(product) {
       this.$emit('updateProduct', product);
+    },
+    deleteProduct(product, index) {
+      this.axios.delete(`https://node-baseapi.herokuapp.com/api/products/${product.id}`)
+              .then(() => {
+                this.products.splice(index, 1);
+              })
+              .catch(error => console.log('error delete product', error));
+    }
+  },
+  computed: {
+    totalProducts() {
+      return this.products.length;
+    },
+    totalPrice() {
+      return this.products
+              .map(product => product.price)
+              .reduce((total, price) => total + price);
     }
   }
 }
